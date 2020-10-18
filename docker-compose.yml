@@ -1,0 +1,65 @@
+version: "3.8"
+
+
+services:
+    backend:
+        build: ./backend
+        container_name:  backend
+        restart: always
+        environment:
+            - APP_NAME=FlaskApp
+        volumes:
+            - './backend:/backend'
+        expose:
+            - 8080
+    nginx:
+        build: ./nginx
+        container_name:  nginx
+        restart: always
+        ports:
+            - "80:80"
+    frontend:
+        build: ./frontend
+        container_name:  frontend
+        restart: always
+        volumes:
+          - './frontend:/frontend'
+
+        #  port allows the host machine to link to container
+        #  8000 for vue ui, 5000 for our vue app
+        ports:
+          - "8000:8000"
+          - "5000:5000"
+    mongodb:
+        image: mongo:4.2.5-bionic
+        container_name:  mongodb
+        restart: always
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=example
+        volumes:
+            - './database:/data/db'
+        ports:
+            - "27017:27017"
+            - "27018:27018"
+            - "27019:27019"
+        expose:
+            - 27017
+            - 27018
+            - 27019
+
+    mongo-express:
+        image: mongo-express
+        restart: always
+        environment:
+            # mongodb authentication
+            - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=example
+            # mongodb URI
+            - ME_CONFIG_MONGODB_SERVER=mongodb
+            - ME_CONFIG_MONGODB_PORT=27017
+            # web login username and password
+            - ME_CONFIG_BASICAUTH_USERNAME=mongo
+            - ME_CONFIG_BASICAUTH_PASSWORD=express
+        ports:
+            - 8081:8081
