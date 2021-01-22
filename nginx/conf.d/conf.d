@@ -1,8 +1,6 @@
 server {
     listen 80;
 
-    # https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
-    #  listen to our npm server.
     location / {
         proxy_pass http://frontend:8080;
         proxy_http_version 1.1;
