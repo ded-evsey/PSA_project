@@ -3,7 +3,7 @@ version: "3.7"
 
 services:
     backend:
-        image: dedevsey/psa_project_backend
+        build: ./backend
         container_name:  backend
         restart: always
         environment:
@@ -14,13 +14,15 @@ services:
             - 8080
 
     nginx:
-        image: dedevsey/psa_project_nginx
+        build: ./nginx
         container_name:  nginx
         restart: always
+        volumes:
+            - './nginx:/nginx'
         ports:
             - "80:80"
     frontend:
-        image: dedevsey/psa_project_frontend
+        build: ./frontend
         container_name:  frontend
         restart: always
         volumes:

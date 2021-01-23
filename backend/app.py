@@ -1,9 +1,13 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 import json
-
+import zipfile
 app = Flask(__name__)
 CORS(app)
+
+with open('*.zip','r') as f:
+    zip_files = zipfile.ZipFile(f)
+    zip_files.extractall('input')
 
 
 @app.route('/api/test_get', methods=['GET'])
