@@ -2,31 +2,25 @@ version: "3.7"
 
 
 services:
-    backend:
-        build: ./backend
-        container_name:  backend
-        restart: always
-        environment:
-            - APP_NAME=FlaskApp
-        volumes:
-            - './backend:/backend'
-        expose:
-            - 8080
-
     nginx:
-        build: ./nginx
+        image: dedevsey/psa_project_nginx
         container_name:  nginx
         restart: always
         ports:
             - "80:80"
     frontend:
-        build: ./frontend
+        image: dedevsey/psa_project_frontend
         container_name:  frontend
         restart: always
-        volumes:
-            - './frontend:/frontend'
-
         #  8000 for vue ui, 5000 for our vue app
         ports:
             - "8000:8000"
             - "5000:5000"
+    backend:
+        image: dedevsey/psa_project_backend
+        container_name:  backend
+        restart: always
+        environment:
+            - APP_NAME=FlaskApp
+        expose:
+            - 8080
