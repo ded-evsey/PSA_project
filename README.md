@@ -13,7 +13,7 @@ The task was posed as follows:
 1. git pull
 2. install docker-compose
 3. run "docker-compose run"
-### In brouser:
+### In browser:
 1. go http://127.0.0.1:8000/dashboard (if not project, import from frontend dir)
 2. tasks->serve->config->ports 5000-> save
 3. run task
