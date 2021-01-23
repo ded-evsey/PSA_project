@@ -7,7 +7,7 @@ The task was posed as follows:
 >The service offers to download the archive with satellite photographs 
 >and select those on which the silhouette of an airplane or ship is recognized. 
 >(Data for training and some recommendations for this can be found on the website https : //www.kaggle.com./c/airbus-ship-detection/data)
-RLE was used as a search algorithm
+
 # How to start
 ### In console:
 1. git pull
